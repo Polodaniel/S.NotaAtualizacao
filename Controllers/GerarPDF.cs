@@ -1,6 +1,7 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using S.NotaAtualizacao.Data;
@@ -108,6 +109,7 @@ namespace S.NotaAtualizacao.Controllers
                                       .Replace("#DescriçãoVisãoGeral#", !string.IsNullOrEmpty(x.VisaoGeral) ? x.VisaoGeral.ToString() : string.Empty)
                                       .Replace("#DescriçãoDetalhes#", !string.IsNullOrEmpty(x.Detalhes) ? x.Detalhes.ToString() : string.Empty)
                                       .Replace("#DescriçãoAnaliseAjuste#", !string.IsNullOrEmpty(x.AnaliseAjuste) ? x.AnaliseAjuste.ToString() : string.Empty)
+                                      .Replace("IMAGENS", "")
                                       .Replace("#PrintsAnexado#", "")
                                       ;
 
@@ -136,6 +138,11 @@ namespace S.NotaAtualizacao.Controllers
         public override void OnStartPage(PdfWriter writer, Document document)
         {
             base.OnStartPage(writer, document);
+
+            //var caminhoImagem = HttpContext.Current.Server.MapPath("/Content/img/Cabecaclho.png");
+
+            //var imagem1 = Image.GetInstance(caminhoImagem);
+            //document.Add(imagem1);
         }
 
         public override void OnEndPage(PdfWriter writer, Document document)
