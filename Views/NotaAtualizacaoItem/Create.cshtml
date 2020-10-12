@@ -15,25 +15,26 @@
         <form asp-action="ImpressaoGeral" formtarget="_blank">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div id="DadosGerais" class="card p-2">
-                <div class="row">
+            <div id="DadosGerais" class="p-2">
+                <label class="control-label font-weight-bold">Dados Gerais</label>
+                <div class="row mt-2">
                     <div class="col-3">
                         <div class="form-group">
-                            <label asp-for="Ocorrencia" class="control-label"></label>
+                            <label asp-for="Ocorrencia" class="control-label mb-0 font-weight-bold small"></label>
                             <input asp-for="Ocorrencia" class="form-control" min="0" />
                             <span asp-validation-for="Ocorrencia" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <label asp-for="Chamado" class="control-label"></label>
+                            <label asp-for="Chamado" class="control-label mb-0 font-weight-bold small"></label>
                             <input asp-for="Chamado" class="form-control" />
                             <span asp-validation-for="Chamado" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label class="control-label">Cliente</label>
+                            <label class="control-label mb-0 font-weight-bold small">Cliente</label>
                             <select asp-for="CodigoCliente" class="form-control" asp-items="ViewBag.CodigoCliente"></select>
                         </div>
                     </div>
@@ -41,18 +42,18 @@
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-warning disabled">Voltar</button>
-                            <button type="button" class="btn btn-primary" onclick="BotaoDadosGeraisProximo()">Proximo</button>
+                            <button type="button" class="btn btn-sm btn-outline-warning disabled" disabled>Voltar</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="BotaoDadosGeraisProximo()">Proximo</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="VisaoGeral" class="card p-3">
+            <div id="VisaoGeral" class=" p-3">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="VisaoGeral" class="control-label"></label>
+                            <label asp-for="VisaoGeral" class="control-label font-weight-bold  mb-0"></label>
                             <textarea asp-for="VisaoGeral" class="form-control textarea" rows="10"></textarea>
                             <span asp-validation-for="VisaoGeral" class="text-danger"></span>
                         </div>
@@ -61,18 +62,18 @@
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-warning" onclick="BotaoVisaoGeralAnterior()">Voltar</button>
-                            <button type="button" class="btn btn-primary" onclick="BotaoVisaoGeralProximo()">Proximo</button>
+                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoVisaoGeralAnterior()">Voltar</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="BotaoVisaoGeralProximo()">Proximo</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="Detalhes" class="card p-2">
+            <div id="Detalhes" class=" p-2">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Detalhes" class="control-label"></label>
+                            <label asp-for="Detalhes" class="control-label font-weight-bold  mb-0"></label>
                             <textarea asp-for="Detalhes" class="form-control textarea" rows="10"></textarea>
                             <span asp-validation-for="Detalhes" class="text-danger"></span>
                         </div>
@@ -81,18 +82,18 @@
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-warning" onclick="BotaoDetalhesAnterior()">Voltar</button>
-                            <button type="button" class="btn btn-primary" onclick="BotaoDetalhesProximo()">Proximo</button>
+                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoDetalhesAnterior()">Voltar</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="BotaoDetalhesProximo()">Proximo</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="AnaliseAjuste" class="card p-2">
+            <div id="AnaliseAjuste" class=" p-2">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="AnaliseAjuste" class="control-label"></label>
+                            <label asp-for="AnaliseAjuste" class="control-label font-weight-bold  mb-0"></label>
                             <textarea asp-for="AnaliseAjuste" class="form-control textarea" rows="105"></textarea>
                             <span asp-validation-for="AnaliseAjuste" class="text-danger"></span>
                         </div>
@@ -101,8 +102,8 @@
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-warning" onclick="BotaoAnaliseAjusteAnterior()">Voltar</button>
-                            <input type="submit" value="Gerar Nota de Atualização" class="btn btn-success" />
+                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoAnaliseAjusteAnterior()">Voltar</button>
+                            <input type="submit" value="Gerar Nota de Atualização" class="btn btn-sm btn-success" />
                         </div>
                     </div>
                 </div>

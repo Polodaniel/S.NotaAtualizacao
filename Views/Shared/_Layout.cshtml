@@ -1,5 +1,9 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,24 +18,28 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 text-light">
             <div class="container">
                 @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">S.NotaAtualizacao</a>*@
-                <img src="~/img/banner.png" width="55" height="40" />
+                <img src="~/img/banner.png" width="40" height="30" />
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1 ml-4">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home" style="font-size: 20px;"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="NotaAtualizacaoItem" asp-action="Create"><i class="fas fa-file-pdf" style="font-size: 20px;"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index"><i class="fas fa-users" style="font-size: 20px;"></i></a>
-                        </li>
-                    </ul>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <ul class="navbar-nav flex-grow-1 ml-4">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home mr-1"></i>Ínicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="NotaAtualizacaoItem" asp-action="Create"><i class="fas fa-file-pdf mr-1"></i>Nova Nota de Atualização</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index"><i class="fas fa-users mr-1"></i>Cliente</a>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
         </nav>
@@ -53,11 +61,10 @@
     <script src="~/lib/summernote/summernote-bs4.min.js"></script>
     <script>
         $(function () {
-
-            //$('.textarea').summernote()
+            OcultarDadosIniciais();
             $('.textarea').summernote({
-                height: 300,   //set editable area's height
-                codemirror: { // codemirror options
+                height: 300,
+                codemirror: {
                     theme: 'monokai'
                 },
                 toolbar: [
