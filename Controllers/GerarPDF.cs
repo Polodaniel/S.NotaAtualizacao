@@ -30,7 +30,7 @@ namespace S.NotaAtualizacao.Controllers
 
             Document document = new Document(PageSize.A4);
 
-            document.SetMargins(0, 0, 200, 0);
+            document.SetMargins(0, 0, 0, 0);
             document.AddCreationDate();
 
             PdfWriter writer = PdfWriter.GetInstance(document, ms);
@@ -65,7 +65,7 @@ namespace S.NotaAtualizacao.Controllers
             HTML = HTML.Append("<html>                                                                    ");
             HTML = HTML.Append("    <head>                                                                ");
             HTML = HTML.Append("    </head>                                                               ");
-            HTML = HTML.Append("    <body style=\"margin: 0; width: auto; font-family: arial, sans-serif; color: #242424;font-size: 10.5px;line-height: 1.8;\">                                                                ");
+            HTML = HTML.Append("    <body style=\"margin: 0; width: auto; font-family: arial, sans-serif; color: #242424;font-size: 12px;line-height: 1.8;\">                                                                ");
             HTML = HTML.Append("    <div style=\"padding: 50px;\">");
             HTML = HTML.Append("        <div>");
             HTML = HTML.Append("            <p style=\"font-weight: bold;\"><span>Ocorrência: </span> #NumeroOcorrencia#</p>");
@@ -94,7 +94,20 @@ namespace S.NotaAtualizacao.Controllers
             HTML = HTML.Append("            IMAGENS");
             HTML = HTML.Append("        </div>");
             HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("            #PrintsAnexado#");
+            HTML = HTML.Append("           #Imagem1#");
+            HTML = HTML.Append("            #Legenda1#");
+            HTML = HTML.Append("        </div>");
+            HTML = HTML.Append("        <div>");
+            HTML = HTML.Append("            #Imagem2#");
+            HTML = HTML.Append("            #Legenda2#");
+            HTML = HTML.Append("        </div>");
+            HTML = HTML.Append("        <div>");
+            HTML = HTML.Append("            #Imagem3#");
+            HTML = HTML.Append("            #Legenda3#");
+            HTML = HTML.Append("        </div>");
+            HTML = HTML.Append("        <div>");
+            HTML = HTML.Append("            #Imagem4#");
+            HTML = HTML.Append("            #Legenda4#");
             HTML = HTML.Append("        </div>");
             HTML = HTML.Append("    </div>");
             HTML = HTML.Append("    </body>");
@@ -103,19 +116,50 @@ namespace S.NotaAtualizacao.Controllers
             var cliente = _context.Clientes.Where(y => y.Codigo == x.CodigoCliente).FirstOrDefault();
 
             var HTML_Finalizado = HTML.ToString()
-                                      .Replace("#NumeroOcorrencia#",x.Ocorrencia.ToString())
-                                      .Replace("#NumeroChamado#",x.Chamado.ToString())
-                                      .Replace("#NomeCliente#", !Equals(cliente,null) ? cliente.Sigla : string.Empty)
+                                      .Replace("#NumeroOcorrencia#", x.Ocorrencia.ToString())
+                                      .Replace("#NumeroChamado#", x.Chamado.ToString())
+                                      .Replace("#NomeCliente#", !Equals(cliente, null) ? cliente.Sigla : string.Empty)
                                       .Replace("#DescriçãoVisãoGeral#", !string.IsNullOrEmpty(x.VisaoGeral) ? x.VisaoGeral.ToString() : string.Empty)
                                       .Replace("#DescriçãoDetalhes#", !string.IsNullOrEmpty(x.Detalhes) ? x.Detalhes.ToString() : string.Empty)
                                       .Replace("#DescriçãoAnaliseAjuste#", !string.IsNullOrEmpty(x.AnaliseAjuste) ? x.AnaliseAjuste.ToString() : string.Empty)
-                                      .Replace("IMAGENS", "")
-                                      .Replace("#PrintsAnexado#", "")
+                                      .Replace("IMAGENS", !Equals(x.QtdeImagens, 0) ? "IMAGENS" : string.Empty)
+                                      .Replace("#Imagem1#", MontaLinhaImagem(x.ContentType1,x.Imagem1))
+                                      .Replace("#Legenda1#", !string.IsNullOrEmpty(x.Descricao1) ? x.Descricao1 : string.Empty)
+                                      .Replace("#Imagem2#", MontaLinhaImagem(x.ContentType2,x.Imagem2))
+                                      .Replace("#Legenda2#", !string.IsNullOrEmpty(x.Descricao2) ? x.Descricao2 : string.Empty)
+                                      .Replace("#Imagem3#", MontaLinhaImagem(x.ContentType3,x.Imagem3))
+                                      .Replace("#Legenda3#", !string.IsNullOrEmpty(x.Descricao3) ? x.Descricao3 : string.Empty)
+                                      .Replace("#Imagem4#", MontaLinhaImagem(x.ContentType4, x.Imagem4))
+                                      .Replace("#Legenda4#", !string.IsNullOrEmpty(x.Descricao4) ? x.Descricao4 : string.Empty)
                                       ;
 
             HTML_Finalizado = HTML_Finalizado.Replace("<br>", "");
 
             return HTML_Finalizado;
+        }
+
+        private string MontaLinhaImagem(string contentType, byte[] imagem)
+        {
+            var linhaImagem = string.Empty;
+
+            var imgConvertida = ConvertArrayBase64(imagem);
+
+            if (!string.IsNullOrEmpty(contentType) && !string.IsNullOrEmpty(imgConvertida)) 
+            {
+                linhaImagem = "<img src='data:#ContentType#;base64, #Base64Imagem#'></img>";
+
+                linhaImagem = linhaImagem.Replace("#ContentType#",contentType)
+                                         .Replace("#Base64Imagem#", imgConvertida);
+
+            }
+
+            return linhaImagem;
+        }
+
+        private string ConvertArrayBase64(byte[] imagem)
+        {
+            return !Equals(imagem, null) ? Convert.ToBase64String(imagem) : null;
+            //return !Equals(imagem, null) ? System.Text.ASCIIEncoding.ASCII.GetString(imagem) : null;
         }
     }
 
@@ -139,10 +183,12 @@ namespace S.NotaAtualizacao.Controllers
         {
             base.OnStartPage(writer, document);
 
-            //var caminhoImagem = HttpContext.Current.Server.MapPath("/Content/img/Cabecaclho.png");
+            var caminhoImagem = "https://i.ibb.co/vdgQbC9/cabecalho.png";
 
-            //var imagem1 = Image.GetInstance(caminhoImagem);
-            //document.Add(imagem1);
+            var img = Image.GetInstance(caminhoImagem);
+            img.ScaleToFit(600, 280);
+
+            document.Add(img);
         }
 
         public override void OnEndPage(PdfWriter writer, Document document)

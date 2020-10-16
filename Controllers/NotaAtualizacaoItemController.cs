@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -75,11 +77,61 @@ namespace S.NotaAtualizacao.Controllers
         }
 
         [HttpPost]
-        public FileStreamResult ImpressaoGeral([Bind("Codigo,Ocorrencia,Chamado,CodigoCliente,VisaoGeral,Detalhes,AnaliseAjuste,Imagem1,ContentType1,Descricao1,Imagem2,ContentType2,Descricao2,Imagem3,ContentType3,Descricao3,Imagem4,ContentType4,Descricao4")] NotaAtualizacaoItem notaAtualizacaoItem)
+        public FileStreamResult ImpressaoGeral([Bind("Codigo,Ocorrencia,Chamado,CodigoCliente,VisaoGeral,Detalhes,AnaliseAjuste,img1,Imagem1,ContentType1,Descricao1,img2,Imagem2,ContentType2,Descricao2,img3,Imagem3,ContentType3,Descricao3,img4,Imagem4,ContentType4,Descricao4")] NotaAtualizacaoItem notaAtualizacaoItem)
         {
+            notaAtualizacaoItem = MontaObjetoComImagens(notaAtualizacaoItem);
+
             var PDF = new GerarPDF(_context).GerarArquivoPDF(notaAtualizacaoItem);
 
             return File(PDF, "application/pdf");
+        }
+
+        private NotaAtualizacaoItem MontaObjetoComImagens(NotaAtualizacaoItem notaAtualizacaoItem)
+        {
+            notaAtualizacaoItem.Imagem1 = MontaArrayImagem(notaAtualizacaoItem.img1);
+            notaAtualizacaoItem.ContentType1 = MontaContentTypeImagem(notaAtualizacaoItem.img1);
+
+            notaAtualizacaoItem.Imagem2 = MontaArrayImagem(notaAtualizacaoItem.img2);
+            notaAtualizacaoItem.ContentType2 = MontaContentTypeImagem(notaAtualizacaoItem.img2);
+
+            notaAtualizacaoItem.Imagem3 = MontaArrayImagem(notaAtualizacaoItem.img3);
+            notaAtualizacaoItem.ContentType3 = MontaContentTypeImagem(notaAtualizacaoItem.img3);
+
+            notaAtualizacaoItem.Imagem4 = MontaArrayImagem(notaAtualizacaoItem.img4);
+            notaAtualizacaoItem.ContentType4 = MontaContentTypeImagem(notaAtualizacaoItem.img4);
+
+            return notaAtualizacaoItem;
+        }
+
+        private string MontaContentTypeImagem(IList<IFormFile> img)
+        {
+            IFormFile imagemEnviada = img.FirstOrDefault();
+
+            if (imagemEnviada != null || imagemEnviada.ContentType.ToLower().StartsWith("image/"))
+            {
+                MemoryStream ms = new MemoryStream();
+                imagemEnviada.OpenReadStream().CopyTo(ms);
+
+                return imagemEnviada.ContentType;
+
+            }
+            else
+                return null;
+        }
+
+        private byte[] MontaArrayImagem(IList<IFormFile> img)
+        {
+            IFormFile imagemEnviada = img.FirstOrDefault();
+
+            if (imagemEnviada != null || imagemEnviada.ContentType.ToLower().StartsWith("image/"))
+            {
+                MemoryStream ms = new MemoryStream();
+                imagemEnviada.OpenReadStream().CopyTo(ms);
+
+                return ms.ToArray();
+            }
+            else
+                return null;
         }
 
         // GET: NotaAtualizacaoItem/Edit/5

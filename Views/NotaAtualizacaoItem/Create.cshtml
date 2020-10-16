@@ -11,8 +11,7 @@
 
     </div>
     <div class="col-12">
-        @*<form asp-action="Create">*@
-        <form asp-action="ImpressaoGeral" formtarget="_blank">
+        <form asp-action="ImpressaoGeral" formtarget="_blank" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div id="DadosGerais" class="p-2">
@@ -103,73 +102,148 @@
                     <div class="col align-right">
                         <div class="form-group">
                             <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoAnaliseAjusteAnterior()">Voltar</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="BotaoAnaliseAjusteProximo()">Proximo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Imagens" class="card p-2">
+                <label class="control-label font-weight-bold mb-3">Imagens</label>
+                <div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <div class="custom-file">
+                                        <input type="file" name="img1" class="custom-file-input" id="imagem1" lang="pt">
+                                        <label class="custom-file-label" for="imagem1">Selecionar Imagem</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <textarea style="font-size: 10px;" asp-for="Descricao1" class="form-control mt-1" rows="3" placeholder="Legenda"></textarea>
+                                    <span asp-validation-for="Descricao1" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <div class="custom-file">
+                                        <input type="file" name="img2" class="custom-file-input" id="imagem2">
+                                        <label class="custom-file-label" for="imagem2">Selecionar Imagem</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <textarea style="font-size: 10px;" asp-for="Descricao2" class="form-control mt-1" rows="3" placeholder="Legenda"></textarea>
+                                    <span asp-validation-for="Descricao2" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <div class="custom-file">
+                                        <input type="file" name="img3" class="custom-file-input" id="imagem3">
+                                        <label class="custom-file-label" for="imagem3">Selecionar Imagem</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <textarea style="font-size: 10px;" asp-for="Descricao3" class="form-control mt-1" rows="3" placeholder="Legenda"></textarea>
+                                    <span asp-validation-for="Descricao3" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <div class="custom-file">
+                                        <input type="file" name="img4" class="custom-file-input" id="imagem4">
+                                        <label class="custom-file-label" for="imagem4">Selecionar Imagem</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <textarea style="font-size: 10px;" asp-for="Descricao4" class="form-control mt-1" rows="3" placeholder="Legenda"></textarea>
+                                    <span asp-validation-for="Descricao4" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row text-right">
+                    <div class="col align-right">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoImagensAnterior()">Voltar</button>
                             <input type="submit" value="Gerar Nota de Atualização" class="btn btn-sm btn-success" />
                         </div>
                     </div>
                 </div>
             </div>
 
-
             @*<div class="form-group">
-            <label asp-for="Imagem1" class="control-label"></label>
-            <input asp-for="Imagem1" class="form-control" />
-            <span asp-validation-for="Imagem1" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ContentType1" class="control-label"></label>
-            <input asp-for="ContentType1" class="form-control" />
-            <span asp-validation-for="ContentType1" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Descricao1" class="control-label"></label>
-            <input asp-for="Descricao1" class="form-control" />
-            <span asp-validation-for="Descricao1" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Imagem2" class="control-label"></label>
-            <input asp-for="Imagem2" class="form-control" />
-            <span asp-validation-for="Imagem2" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ContentType2" class="control-label"></label>
-            <input asp-for="ContentType2" class="form-control" />
-            <span asp-validation-for="ContentType2" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Descricao2" class="control-label"></label>
-            <input asp-for="Descricao2" class="form-control" />
-            <span asp-validation-for="Descricao2" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Imagem3" class="control-label"></label>
-            <input asp-for="Imagem3" class="form-control" />
-            <span asp-validation-for="Imagem3" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ContentType3" class="control-label"></label>
-            <input asp-for="ContentType3" class="form-control" />
-            <span asp-validation-for="ContentType3" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Descricao3" class="control-label"></label>
-            <input asp-for="Descricao3" class="form-control" />
-            <span asp-validation-for="Descricao3" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Imagem4" class="control-label"></label>
-            <input asp-for="Imagem4" class="form-control" />
-            <span asp-validation-for="Imagem4" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ContentType4" class="control-label"></label>
-            <input asp-for="ContentType4" class="form-control" />
-            <span asp-validation-for="ContentType4" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Descricao4" class="control-label"></label>
-            <input asp-for="Descricao4" class="form-control" />
-            <span asp-validation-for="Descricao4" class="text-danger"></span>
-        </div>*@
+                    <label asp-for="Imagem1" class="control-label"></label>
+                    <input asp-for="Imagem1" class="form-control" />
+                    <span asp-validation-for="Imagem1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContentType1" class="control-label"></label>
+                    <input asp-for="ContentType1" class="form-control" />
+                    <span asp-validation-for="ContentType1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Imagem2" class="control-label"></label>
+                    <input asp-for="Imagem2" class="form-control" />
+                    <span asp-validation-for="Imagem2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContentType2" class="control-label"></label>
+                    <input asp-for="ContentType2" class="form-control" />
+                    <span asp-validation-for="ContentType2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descricao2" class="control-label"></label>
+                    <input asp-for="Descricao2" class="form-control" />
+                    <span asp-validation-for="Descricao2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Imagem3" class="control-label"></label>
+                    <input asp-for="Imagem3" class="form-control" />
+                    <span asp-validation-for="Imagem3" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContentType3" class="control-label"></label>
+                    <input asp-for="ContentType3" class="form-control" />
+                    <span asp-validation-for="ContentType3" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descricao3" class="control-label"></label>
+                    <input asp-for="Descricao3" class="form-control" />
+                    <span asp-validation-for="Descricao3" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Imagem4" class="control-label"></label>
+                    <input asp-for="Imagem4" class="form-control" />
+                    <span asp-validation-for="Imagem4" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContentType4" class="control-label"></label>
+                    <input asp-for="ContentType4" class="form-control" />
+                    <span asp-validation-for="ContentType4" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descricao4" class="control-label"></label>
+                    <input asp-for="Descricao4" class="form-control" />
+                    <span asp-validation-for="Descricao4" class="text-danger"></span>
+                </div>*@
 
         </form>
     </div>
