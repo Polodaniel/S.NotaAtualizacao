@@ -1,12 +1,10 @@
 ﻿@model S.NotaAtualizacao.Models.Clientes
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Cliente";
 }
 
-<h1>Edit</h1>
-
-<h4>Clientes</h4>
+<h4>Cliente</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,14 +22,14 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-sm btn-warning" asp-action="Index">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-sm btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

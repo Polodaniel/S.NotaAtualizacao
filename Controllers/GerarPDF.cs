@@ -55,7 +55,17 @@ namespace S.NotaAtualizacao.Controllers
             output.Write(file, 0, file.Length);
             output.Position = 0;
 
+            ApagarImagensDiretorio(notaAtualizacaoItem);
+
             return output;
+        }
+
+        private void ApagarImagensDiretorio(NotaAtualizacaoItem notaAtualizacaoItem)
+        {
+            DirectoryInfo img1 = new DirectoryInfo("Imagens/");
+
+            foreach (FileInfo file in img1.GetFiles())
+                file.Delete();
         }
 
         public string CriaArquivoHTML(Models.NotaAtualizacaoItem x)
@@ -66,50 +76,50 @@ namespace S.NotaAtualizacao.Controllers
             HTML = HTML.Append("    <head>                                                                ");
             HTML = HTML.Append("    </head>                                                               ");
             HTML = HTML.Append("    <body style=\"margin: 0; width: auto; font-family: arial, sans-serif; color: #242424;font-size: 12px;line-height: 1.8;\">                                                                ");
-            HTML = HTML.Append("    <div style=\"padding: 50px;\">");
-            HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("            <p style=\"font-weight: bold;\"><span>Ocorrência: </span> #NumeroOcorrencia#</p>");
-            HTML = HTML.Append("            <p><span style=\"font-weight: bold;\" >Chamado: </span> #NumeroChamado#</p>");
-            HTML = HTML.Append("            <p><span style=\"font-weight: bold;\">Cliente: </span> #NomeCliente#</p>");
+            HTML = HTML.Append("        <div style=\"padding: 50px;\">");
+            HTML = HTML.Append("            <div>");
+            HTML = HTML.Append("                <p style=\"font-weight: bold;\"><span>Ocorrência: </span> #NumeroOcorrencia#</p>");
+            HTML = HTML.Append("                <p><span style=\"font-weight: bold;\" >Chamado: </span> #NumeroChamado#</p>");
+            HTML = HTML.Append("                <p><span style=\"font-weight: bold;\">Cliente: </span> #NomeCliente#</p>");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div style=\"font-weight: bold; font-size: 14px; color: midnightblue;\">");
+            HTML = HTML.Append("                V​ISÃO​ G​ERAL");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div>");
+            HTML = HTML.Append("                #DescriçãoVisãoGeral#");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div style=\"font-weight: bold; font-size: 14px; color: midnightblue;\">");
+            HTML = HTML.Append("                DETALHES");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div>");
+            HTML = HTML.Append("                #DescriçãoDetalhes#");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div style=\"font-weight: bold; font-size: 14px; color: midnightblue;\">");
+            HTML = HTML.Append("                A​NÁLISE ​​E  A​JUSTE");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div>");
+            HTML = HTML.Append("                #DescriçãoAnaliseAjuste#");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div style=\"font-weight: bold; font-size: 14px; color: midnightblue;\">");
+            HTML = HTML.Append("                IMAGENS");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div style=\"text-align: center\">");
+            HTML = HTML.Append("               #Imagem1#");
+            HTML = HTML.Append("                #Legenda1#");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div style=\"text-align: center\">");
+            HTML = HTML.Append("                #Imagem2#");
+            HTML = HTML.Append("                #Legenda2#");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div style=\"text-align: center\">");
+            HTML = HTML.Append("                #Imagem3#");
+            HTML = HTML.Append("                #Legenda3#");
+            HTML = HTML.Append("            </div>");
+            HTML = HTML.Append("            <div style=\"text-align: center\">");
+            HTML = HTML.Append("                #Imagem4#");
+            HTML = HTML.Append("                #Legenda4#");
+            HTML = HTML.Append("            </div>");
             HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div style=\"font-weight: bold; font-size: 14px; color: midnightblue;\">");
-            HTML = HTML.Append("            V​ISÃO​ G​ERAL");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("            #DescriçãoVisãoGeral#");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div style=\"font-weight: bold; font-size: 14px; color: midnightblue;\">");
-            HTML = HTML.Append("            DETALHES");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("            #DescriçãoDetalhes#");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div style=\"font-weight: bold; font-size: 14px; color: midnightblue;\">");
-            HTML = HTML.Append("            A​NÁLISE ​​E  A​JUSTE");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("            #DescriçãoAnaliseAjuste#");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div style=\"font-weight: bold; font-size: 14px; color: midnightblue;\">");
-            HTML = HTML.Append("            IMAGENS");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("           #Imagem1#");
-            HTML = HTML.Append("            #Legenda1#");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("            #Imagem2#");
-            HTML = HTML.Append("            #Legenda2#");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("            #Imagem3#");
-            HTML = HTML.Append("            #Legenda3#");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("        <div>");
-            HTML = HTML.Append("            #Imagem4#");
-            HTML = HTML.Append("            #Legenda4#");
-            HTML = HTML.Append("        </div>");
-            HTML = HTML.Append("    </div>");
             HTML = HTML.Append("    </body>");
             HTML = HTML.Append("</html>");
 
@@ -123,14 +133,14 @@ namespace S.NotaAtualizacao.Controllers
                                       .Replace("#DescriçãoDetalhes#", !string.IsNullOrEmpty(x.Detalhes) ? x.Detalhes.ToString() : string.Empty)
                                       .Replace("#DescriçãoAnaliseAjuste#", !string.IsNullOrEmpty(x.AnaliseAjuste) ? x.AnaliseAjuste.ToString() : string.Empty)
                                       .Replace("IMAGENS", !Equals(x.QtdeImagens, 0) ? "IMAGENS" : string.Empty)
-                                      .Replace("#Imagem1#", MontaLinhaImagem(x.ContentType1,x.Imagem1))
                                       .Replace("#Legenda1#", !string.IsNullOrEmpty(x.Descricao1) ? x.Descricao1 : string.Empty)
-                                      .Replace("#Imagem2#", MontaLinhaImagem(x.ContentType2,x.Imagem2))
                                       .Replace("#Legenda2#", !string.IsNullOrEmpty(x.Descricao2) ? x.Descricao2 : string.Empty)
-                                      .Replace("#Imagem3#", MontaLinhaImagem(x.ContentType3,x.Imagem3))
                                       .Replace("#Legenda3#", !string.IsNullOrEmpty(x.Descricao3) ? x.Descricao3 : string.Empty)
-                                      .Replace("#Imagem4#", MontaLinhaImagem(x.ContentType4, x.Imagem4))
                                       .Replace("#Legenda4#", !string.IsNullOrEmpty(x.Descricao4) ? x.Descricao4 : string.Empty)
+                                      .Replace("#Imagem1#", MontaLinhaImagem(x.CaminhoImagem1))
+                                      .Replace("#Imagem2#", MontaLinhaImagem(x.CaminhoImagem2))
+                                      .Replace("#Imagem3#", MontaLinhaImagem(x.CaminhoImagem3))
+                                      .Replace("#Imagem4#", MontaLinhaImagem(x.CaminhoImagem4))
                                       ;
 
             HTML_Finalizado = HTML_Finalizado.Replace("<br>", "");
@@ -138,19 +148,15 @@ namespace S.NotaAtualizacao.Controllers
             return HTML_Finalizado;
         }
 
-        private string MontaLinhaImagem(string contentType, byte[] imagem)
+        private string MontaLinhaImagem(string caminhoImagem)
         {
             var linhaImagem = string.Empty;
 
-            var imgConvertida = ConvertArrayBase64(imagem);
-
-            if (!string.IsNullOrEmpty(contentType) && !string.IsNullOrEmpty(imgConvertida)) 
+            if (!string.IsNullOrEmpty(caminhoImagem))
             {
-                linhaImagem = "<img src='data:#ContentType#;base64, #Base64Imagem#'></img>";
+                linhaImagem = "<img src='#CaminhoImagem#'></img>";
 
-                linhaImagem = linhaImagem.Replace("#ContentType#",contentType)
-                                         .Replace("#Base64Imagem#", imgConvertida);
-
+                linhaImagem = linhaImagem.Replace("#CaminhoImagem#", caminhoImagem);
             }
 
             return linhaImagem;
@@ -159,7 +165,6 @@ namespace S.NotaAtualizacao.Controllers
         private string ConvertArrayBase64(byte[] imagem)
         {
             return !Equals(imagem, null) ? Convert.ToBase64String(imagem) : null;
-            //return !Equals(imagem, null) ? System.Text.ASCIIEncoding.ASCII.GetString(imagem) : null;
         }
     }
 

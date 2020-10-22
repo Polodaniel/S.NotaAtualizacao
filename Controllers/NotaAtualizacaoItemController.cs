@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,15 +65,15 @@ namespace S.NotaAtualizacao.Controllers
         public async Task<IActionResult> Create([Bind("Codigo,Ocorrencia,Chamado,CodigoCliente,VisaoGeral,Detalhes,AnaliseAjuste,Imagem1,ContentType1,Descricao1,Imagem2,ContentType2,Descricao2,Imagem3,ContentType3,Descricao3,Imagem4,ContentType4,Descricao4")] NotaAtualizacaoItem notaAtualizacaoItem)
         {
             ViewData["CodigoCliente"] = new SelectList(_context.Clientes, "Codigo", "Sigla", notaAtualizacaoItem.CodigoCliente);
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
+
             return View(notaAtualizacaoItem);
         }
 
@@ -88,19 +89,66 @@ namespace S.NotaAtualizacao.Controllers
 
         private NotaAtualizacaoItem MontaObjetoComImagens(NotaAtualizacaoItem notaAtualizacaoItem)
         {
-            notaAtualizacaoItem.Imagem1 = MontaArrayImagem(notaAtualizacaoItem.img1);
-            notaAtualizacaoItem.ContentType1 = MontaContentTypeImagem(notaAtualizacaoItem.img1);
+            if (!Equals(notaAtualizacaoItem.img1, null) && notaAtualizacaoItem.img1.Count > 0)
+            {
+                notaAtualizacaoItem.Imagem1 = MontaArrayImagem(notaAtualizacaoItem.img1);
+                notaAtualizacaoItem.ContentType1 = MontaContentTypeImagem(notaAtualizacaoItem.img1);
+                notaAtualizacaoItem.CaminhoImagem1 = MontarEnderecoImagem(notaAtualizacaoItem.img1, notaAtualizacaoItem.Imagem1);
+            }
 
-            notaAtualizacaoItem.Imagem2 = MontaArrayImagem(notaAtualizacaoItem.img2);
-            notaAtualizacaoItem.ContentType2 = MontaContentTypeImagem(notaAtualizacaoItem.img2);
+            if (!Equals(notaAtualizacaoItem.img2, null) && notaAtualizacaoItem.img2.Count > 0)
+            {
+                notaAtualizacaoItem.Imagem2 = MontaArrayImagem(notaAtualizacaoItem.img2);
+                notaAtualizacaoItem.ContentType2 = MontaContentTypeImagem(notaAtualizacaoItem.img2);
+                notaAtualizacaoItem.CaminhoImagem2 = MontarEnderecoImagem(notaAtualizacaoItem.img2, notaAtualizacaoItem.Imagem2);
+            }
 
-            notaAtualizacaoItem.Imagem3 = MontaArrayImagem(notaAtualizacaoItem.img3);
-            notaAtualizacaoItem.ContentType3 = MontaContentTypeImagem(notaAtualizacaoItem.img3);
+            if (!Equals(notaAtualizacaoItem.img3, null) && notaAtualizacaoItem.img3.Count > 0)
+            {
+                notaAtualizacaoItem.Imagem3 = MontaArrayImagem(notaAtualizacaoItem.img3);
+                notaAtualizacaoItem.ContentType3 = MontaContentTypeImagem(notaAtualizacaoItem.img3);
+                notaAtualizacaoItem.CaminhoImagem3 = MontarEnderecoImagem(notaAtualizacaoItem.img3, notaAtualizacaoItem.Imagem3);
+            }
 
-            notaAtualizacaoItem.Imagem4 = MontaArrayImagem(notaAtualizacaoItem.img4);
-            notaAtualizacaoItem.ContentType4 = MontaContentTypeImagem(notaAtualizacaoItem.img4);
+            if (!Equals(notaAtualizacaoItem.img4, null) && notaAtualizacaoItem.img4.Count > 0)
+            {
+                notaAtualizacaoItem.Imagem4 = MontaArrayImagem(notaAtualizacaoItem.img4);
+                notaAtualizacaoItem.ContentType4 = MontaContentTypeImagem(notaAtualizacaoItem.img4);
+                notaAtualizacaoItem.CaminhoImagem4 = MontarEnderecoImagem(notaAtualizacaoItem.img4, notaAtualizacaoItem.Imagem4);
+            }
 
             return notaAtualizacaoItem;
+        }
+
+        private string MontarEnderecoImagem(IList<IFormFile> img, byte[] imagem)
+        {
+            IFormFile imagemEnviada = img.FirstOrDefault();
+
+            if (imagemEnviada != null && imagemEnviada.ContentType.ToLower().StartsWith("image/"))
+            {
+                var dir = $"Imagens/";
+
+                var nomeImagem = imagemEnviada.FileName;
+
+                var caminho = string.Concat(dir, nomeImagem);
+
+                VerificaDiretorio(dir);
+
+                MemoryStream ms = new MemoryStream(imagem);
+                Image returnImage = Image.FromStream(ms);
+
+                returnImage.Save(caminho);
+
+                return caminho;
+            }
+            else
+                return string.Empty;
+        }
+
+        private static void VerificaDiretorio(string dir)
+        {
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
         }
 
         private string MontaContentTypeImagem(IList<IFormFile> img)

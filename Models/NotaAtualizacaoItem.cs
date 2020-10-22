@@ -48,6 +48,9 @@ namespace S.NotaAtualizacao.Models
 
         [DisplayName("Legenda")]
         public string Descricao1 { get; set; }
+
+        [NotMapped]
+        public string CaminhoImagem1 { get; set; }
         #endregion
 
         #region Imagem 2
@@ -60,6 +63,9 @@ namespace S.NotaAtualizacao.Models
 
         [DisplayName("Legenda")]
         public string Descricao2 { get; set; }
+
+        [NotMapped]
+        public string CaminhoImagem2 { get; set; }
         #endregion
 
         #region Imagem 3
@@ -72,6 +78,9 @@ namespace S.NotaAtualizacao.Models
 
         [DisplayName("Legenda")]
         public string Descricao3 { get; set; }
+
+        [NotMapped]
+        public string CaminhoImagem3 { get; set; }
         #endregion
 
         #region Imagem 4
@@ -84,6 +93,9 @@ namespace S.NotaAtualizacao.Models
 
         [DisplayName("Legenda")]
         public string Descricao4 { get; set; }
+
+        [NotMapped]
+        public string CaminhoImagem4 { get; set; }
         #endregion
 
         #endregion

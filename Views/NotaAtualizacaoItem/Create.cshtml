@@ -1,7 +1,7 @@
 ﻿@model S.NotaAtualizacao.Models.NotaAtualizacaoItem
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nota de Atualização";
 }
 
 <h4>Nova Nota de Atualização</h4>
@@ -17,31 +17,31 @@
             <div id="DadosGerais" class="p-2">
                 <label class="control-label font-weight-bold">Dados Gerais</label>
                 <div class="row mt-2">
-                    <div class="col-3">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label asp-for="Ocorrencia" class="control-label mb-0 font-weight-bold small"></label>
                             <input asp-for="Ocorrencia" class="form-control" min="0" />
                             <span asp-validation-for="Ocorrencia" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label asp-for="Chamado" class="control-label mb-0 font-weight-bold small"></label>
                             <input asp-for="Chamado" class="form-control" />
                             <span asp-validation-for="Chamado" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col col-sm col-md col-lg">
                         <div class="form-group">
                             <label class="control-label mb-0 font-weight-bold small">Cliente</label>
-                            <select asp-for="CodigoCliente" class="form-control" asp-items="ViewBag.CodigoCliente"></select>
+                            <select asp-for="CodigoCliente" class="form-control custom-select" asp-items="ViewBag.CodigoCliente"></select>
                         </div>
                     </div>
                 </div>
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-sm btn-outline-warning disabled" disabled>Voltar</button>
+                            <button type="button" class="btn btn-sm btn-warning disabled" disabled>Voltar</button>
                             <button type="button" class="btn btn-sm btn-primary" onclick="BotaoDadosGeraisProximo()">Proximo</button>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoVisaoGeralAnterior()">Voltar</button>
+                            <button type="button" class="btn btn-sm btn-warning" onclick="BotaoVisaoGeralAnterior()">Voltar</button>
                             <button type="button" class="btn btn-sm btn-primary" onclick="BotaoVisaoGeralProximo()">Proximo</button>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoDetalhesAnterior()">Voltar</button>
+                            <button type="button" class="btn btn-sm btn-warning" onclick="BotaoDetalhesAnterior()">Voltar</button>
                             <button type="button" class="btn btn-sm btn-primary" onclick="BotaoDetalhesProximo()">Proximo</button>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoAnaliseAjusteAnterior()">Voltar</button>
+                            <button type="button" class="btn btn-sm btn-warning" onclick="BotaoAnaliseAjusteAnterior()">Voltar</button>
                             <button type="button" class="btn btn-sm btn-primary" onclick="BotaoAnaliseAjusteProximo()">Proximo</button>
                         </div>
                     </div>
@@ -111,9 +111,8 @@
             <div id="Imagens" class="card p-2">
                 <label class="control-label font-weight-bold mb-3">Imagens</label>
                 <div>
-
                     <div class="row mt-2">
-                        <div class="col">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="row mb-2">
                                 <div class="col-12">
                                     <div class="custom-file">
@@ -127,8 +126,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="row mb-2">
                                 <div class="col-12">
                                     <div class="custom-file">
@@ -143,9 +141,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row mt-2">
-                        <div class="col">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="row mb-2">
                                 <div class="col-12">
                                     <div class="custom-file">
@@ -159,7 +156,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="row mb-2">
                                 <div class="col-12">
                                     <div class="custom-file">
@@ -179,71 +176,12 @@
                 <div class="row text-right">
                     <div class="col align-right">
                         <div class="form-group">
-                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="BotaoImagensAnterior()">Voltar</button>
+                            <button type="button" class="btn btn-sm btn-warning" onclick="BotaoImagensAnterior()">Voltar</button>
                             <input type="submit" value="Gerar Nota de Atualização" class="btn btn-sm btn-success" />
                         </div>
                     </div>
                 </div>
             </div>
-
-            @*<div class="form-group">
-                    <label asp-for="Imagem1" class="control-label"></label>
-                    <input asp-for="Imagem1" class="form-control" />
-                    <span asp-validation-for="Imagem1" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ContentType1" class="control-label"></label>
-                    <input asp-for="ContentType1" class="form-control" />
-                    <span asp-validation-for="ContentType1" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-
-                </div>
-                <div class="form-group">
-                    <label asp-for="Imagem2" class="control-label"></label>
-                    <input asp-for="Imagem2" class="form-control" />
-                    <span asp-validation-for="Imagem2" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ContentType2" class="control-label"></label>
-                    <input asp-for="ContentType2" class="form-control" />
-                    <span asp-validation-for="ContentType2" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Descricao2" class="control-label"></label>
-                    <input asp-for="Descricao2" class="form-control" />
-                    <span asp-validation-for="Descricao2" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Imagem3" class="control-label"></label>
-                    <input asp-for="Imagem3" class="form-control" />
-                    <span asp-validation-for="Imagem3" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ContentType3" class="control-label"></label>
-                    <input asp-for="ContentType3" class="form-control" />
-                    <span asp-validation-for="ContentType3" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Descricao3" class="control-label"></label>
-                    <input asp-for="Descricao3" class="form-control" />
-                    <span asp-validation-for="Descricao3" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Imagem4" class="control-label"></label>
-                    <input asp-for="Imagem4" class="form-control" />
-                    <span asp-validation-for="Imagem4" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ContentType4" class="control-label"></label>
-                    <input asp-for="ContentType4" class="form-control" />
-                    <span asp-validation-for="ContentType4" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Descricao4" class="control-label"></label>
-                    <input asp-for="Descricao4" class="form-control" />
-                    <span asp-validation-for="Descricao4" class="text-danger"></span>
-                </div>*@
 
         </form>
     </div>

@@ -1,13 +1,11 @@
 ﻿@model S.NotaAtualizacao.Models.Clientes
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Cliente";
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>Clientes</h4>
+    <h4>Cliente</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -25,6 +23,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Codigo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-sm btn-warning" asp-action="Index">Voltar</a>
+    <a class="btn btn-sm btn-primary" asp-action="Edit">Editar</a>
 </div>
